@@ -401,7 +401,7 @@ namespace XTouchToLr.Data
                 EncoderMethod(b0, b1, b2, 176, 20, "PostCropVignetteRoundness", 144, 36, 127);
                 EncoderMethod(b0, b1, b2, 176, 21, "PostCropVignetteHighlightContrast", 144, 37, 127);
                 //EncoderMethod(b0, b1, b2, 176, 22, "LuminanceAdjustmentPurple", 144, 38, 127);
-                //EncoderMethod(b0, b1, b2, 176, 23, "CropBottom", 144, 39, 127);
+                //EncoderMethod(b0, b1, b2, 176, 23, "LuminanceAdjustmentMagenta", 144, 39, 127);
 
             }
 
