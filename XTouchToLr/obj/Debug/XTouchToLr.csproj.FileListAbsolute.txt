@@ -8,3 +8,13 @@ F:\!DEV\!Projekty\X-TouchToLR\XTouchToLr\XTouchToLr\bin\Debug\Sanford.Multimedia
 F:\!DEV\!Projekty\X-TouchToLR\XTouchToLr\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.pdb
 F:\!DEV\!Projekty\X-TouchToLR\XTouchToLr\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.xml
 F:\!DEV\!Projekty\X-TouchToLR\XTouchToLr\XTouchToLr\obj\Debug\XTouchToLr.csprojResolveAssemblyReference.cache
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.exe.config
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.exe
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.pdb
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.dll
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.pdb
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.xml
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csprojResolveAssemblyReference.cache
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csproj.CoreCompileInputs.cache
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.exe
+F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.pdb

@@ -103,6 +103,16 @@ namespace XTouchToLr.Engine
                         MidiSend(ChannelCommand.NoteOn, 0, 43, 127);
                         MidiSend(ChannelCommand.NoteOn, 0, 45, 0);
 
+                        Send("PostCropVignetteAmount");
+                        Send("PostCropVignetteMidpoint");
+                        Send("PostCropVignetteFeather");
+                        Send("PostCropVignetteRoundness");
+                        Send("PostCropVignetteHighlightContrast");
+
+                        TurnOffEncoderDisplay(EncodersMidiNumber.Encoder1);
+                        TurnOffEncoderDisplay(EncodersMidiNumber.Encoder7);
+                        TurnOffEncoderDisplay(EncodersMidiNumber.Encoder8);
+
                         break;
 
                     case 6:
@@ -730,7 +740,24 @@ namespace XTouchToLr.Engine
                     EncoderParameter(name, item, "LuminanceAdjustmentPurple", 54);
                     EncoderParameter(name, item, "LuminanceAdjustmentMagenta", 55);
                 }
+
+                if (GlobalSettings.EncoderMenuPosition == 5)
+                {
+                    EncoderParameter(name, item, "PostCropVignetteStyle", 48);
+                    EncoderParameter(name, item, "PostCropVignetteAmount", 49);
+                    EncoderParameter(name, item, "PostCropVignetteMidpoint", 50);
+                    EncoderParameter(name, item, "PostCropVignetteFeather", 51);
+                    EncoderParameter(name, item, "PostCropVignetteRoundness", 52);
+                    EncoderParameter(name, item, "PostCropVignetteHighlightContrast", 53);
+                    //EncoderParameter(name, item, "LuminanceAdjustmentPurple", 54);
+                    //EncoderParameter(name, item, "LuminanceAdjustmentMagenta", 55);
+                }
             }
+        }
+
+        private static void TurnOffEncoderDisplay(EncodersMidiNumber encodersMidiNumber)
+        {
+            MidiSend(ChannelCommand.Controller, 0, (int)encodersMidiNumber, 0);
         }
 
         private static void EncoderParameter(string name, Parameter item, string masterName, byte data)
@@ -827,5 +854,17 @@ namespace XTouchToLr.Engine
                 rstEvent.Reset();
             }
         }
+    }
+
+    public enum EncodersMidiNumber
+    {
+        Encoder1 = 48,
+        Encoder2 = 49,
+        Encoder3 = 50,
+        Encoder4 = 51,
+        Encoder5 = 52,
+        Encoder6 = 53,
+        Encoder7 = 54,
+        Encoder8 = 55
     }
 }
