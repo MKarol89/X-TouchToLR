@@ -108,6 +108,8 @@ namespace XTouchToLr.Engine
                         Send("PostCropVignetteFeather");
                         Send("PostCropVignetteRoundness");
                         Send("PostCropVignetteHighlightContrast");
+                        
+
 
                         TurnOffEncoderDisplay(EncodersMidiNumber.Encoder1);
                         TurnOffEncoderDisplay(EncodersMidiNumber.Encoder7);
@@ -750,7 +752,7 @@ namespace XTouchToLr.Engine
                     EncoderParameter(name, item, "PostCropVignetteRoundness", 52);
                     EncoderParameter(name, item, "PostCropVignetteHighlightContrast", 53);
                     //EncoderParameter(name, item, "LuminanceAdjustmentPurple", 54);
-                    //EncoderParameter(name, item, "LuminanceAdjustmentMagenta", 55);
+                    //EncoderParameter(name, item, "CropBottom", 55);
                 }
             }
         }

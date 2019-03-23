@@ -69,8 +69,14 @@ namespace XTouchToLr.Data
             listParameter.Add(new Parameter("PostCropVignetteRoundness", 100f, -100f));
             listParameter.Add(new Parameter("PostCropVignetteHighlightContrast", 100f, 0f));
 
-        }
+            listParameter.Add(new Parameter("straightenAngle", 45f, -45f));
+            listParameter.Add(new Parameter("CropLeft", 1f, 0f));
+            listParameter.Add(new Parameter("CropTop", 1f, 0f));
+            listParameter.Add(new Parameter("CropRight", 1f, 0f));
+            listParameter.Add(new Parameter("CropBottom", 1f, 0f));
 
+        }
+        
         public static void SetParameters(string[] model)
         {
             foreach (var item in model)
@@ -395,7 +401,7 @@ namespace XTouchToLr.Data
                 EncoderMethod(b0, b1, b2, 176, 20, "PostCropVignetteRoundness", 144, 36, 127);
                 EncoderMethod(b0, b1, b2, 176, 21, "PostCropVignetteHighlightContrast", 144, 37, 127);
                 //EncoderMethod(b0, b1, b2, 176, 22, "LuminanceAdjustmentPurple", 144, 38, 127);
-                //EncoderMethod(b0, b1, b2, 176, 23, "LuminanceAdjustmentMagenta", 144, 39, 127);
+                //EncoderMethod(b0, b1, b2, 176, 23, "CropBottom", 144, 39, 127);
 
             }
 
@@ -895,6 +901,109 @@ namespace XTouchToLr.Data
                     SendToLr.Send("Dehaze");
                 }
             }
+
+            /////////////////// CROP ///////////////////
+
+            if (b0 == 144 && b1 == 86 && b2 == 127)
+            {
+                GlobalSettings.BigEncoderOption = BigEncoderButtonFunctionMidiValue.straightenAngle;
+                BigEncoderDisplayButtons();
+            }   //ROTATE
+
+            if (b0 == 144 && b1 == 87 && b2 == 127)
+            {
+                GlobalSettings.BigEncoderOption = BigEncoderButtonFunctionMidiValue.CropLeft;
+                BigEncoderDisplayButtons();
+            }   //LEFT
+
+            if (b0 == 144 && b1 == 88 && b2 == 127)
+            {
+                GlobalSettings.BigEncoderOption = BigEncoderButtonFunctionMidiValue.CropTop;
+                BigEncoderDisplayButtons();
+            }   //TOP
+
+            if (b0 == 144 && b1 == 89 && b2 == 127)
+            {
+                GlobalSettings.BigEncoderOption = BigEncoderButtonFunctionMidiValue.CropRight;
+                BigEncoderDisplayButtons();
+            }   //RIGHT
+
+            if (b0 == 144 && b1 == 90 && b2 == 127)
+            {
+                GlobalSettings.BigEncoderOption = BigEncoderButtonFunctionMidiValue.CropBottom;
+                BigEncoderDisplayButtons();
+            }   //BOTTOM
+
+            if (b0 == 144 && b1 == 85 && b2 == 127)
+            {
+                SendToLr.Send("select", "cropReset");
+            }   //CROP RESET
+
+            /////////////////// ACTIVE PANEL ///////////////////
+
+            if (b0 == 144 && b1 == 84 && b2 == 127)
+            {
+                if (GlobalSettings.ActivePanel != ActivePanel.crop)
+                {
+                    SendToLr.Send("panel", "crop");
+                    SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 84, 1);
+                    GlobalSettings.ActivePanel = ActivePanel.crop;
+                }
+                else
+                {
+                    SendToLr.Send("panel", "loupe");
+                    SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 84, 0);
+                    GlobalSettings.ActivePanel = ActivePanel.loupe;
+                }
+            }   //CROP PANEL
+
+
+            /////////////////// BIG ENCODER ///////////////////
+            if (b0 == 176 && b1 == 60)
+            {
+                BigEncoder(b0, b1, b2);
+            }
+        }
+
+        public static void BigEncoderDisplayButtons()
+        {
+            var EncoderOption = GlobalSettings.BigEncoderOption;
+
+            SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, (int)EncoderOption, 127);
+
+            foreach (int item in Enum.GetValues(typeof(BigEncoderButtonFunctionMidiValue)))
+            {
+                if (item != (int)EncoderOption)
+                {
+                    SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, item, 0);
+                }
+            }
+        }
+
+        private static void BigEncoder(int b0, int b1, int b2)
+        {
+            var EncoderOption = GlobalSettings.BigEncoderOption;
+
+            var parameter = listParameter.Where(x => x.name == EncoderOption.ToString()).FirstOrDefault();
+            var step = (parameter.maxValue - parameter.minValue) / 250;
+
+            if (b2 == 1)
+            {
+                if (parameter.value < parameter.maxValue)
+                {
+                    parameter.value += step;
+                }
+            }
+            else
+            {
+                if (parameter.value > parameter.minValue)
+                {
+                    parameter.value -= step;
+                }
+            }
+
+            SendToLr.Send(parameter.name);
+
         }
 
         private static void EncoderMethod(byte b0, byte b1, byte b2, byte ifB0rot, byte ifB1rot, string name, byte ifB0but, byte ifB1but, byte ifB2but )
@@ -951,3 +1060,15 @@ namespace XTouchToLr.Data
         public float value { get; set; }
     }
 }
+
+
+public enum BigEncoderButtonFunctionMidiValue
+{
+    straightenAngle = 86,
+    CropLeft = 87,
+    CropTop = 88,
+    CropRight = 89,
+    CropBottom = 90
+}
+
+public enum ActivePanel { loupe, crop = 84, dust, redeye, gradient, circularGradient, localized, upright }

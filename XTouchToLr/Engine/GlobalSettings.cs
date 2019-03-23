@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XTouchToLr.Data;
 using XTouchToLr.Models;
 
 namespace XTouchToLr.Engine
@@ -13,6 +14,7 @@ namespace XTouchToLr.Engine
         public static int faderPage { get; set; }
         public static bool sendingMidi { get; set; }
 
+
         public static Queue<MidiToSendModel> queueMidi = new Queue<MidiToSendModel>();
         public static Queue<SysexModel> queueMidiSysex = new Queue<SysexModel>();
         public static List<SaveParametersModel> saveParameterList = new List<SaveParametersModel>();
@@ -20,6 +22,9 @@ namespace XTouchToLr.Engine
         public static bool IsSaving { get; set; }
 
         public static int EncoderMenuPosition { get; set; }
+
+        public static BigEncoderButtonFunctionMidiValue BigEncoderOption { get; set; }
+        public static ActivePanel ActivePanel;
 
         //public static int threadCount { get; set; }
 
@@ -29,6 +34,8 @@ namespace XTouchToLr.Engine
         {
             faderPage = 1;
             EncoderMenuPosition = 1;
+            BigEncoderOption = BigEncoderButtonFunctionMidiValue.straightenAngle;
+            ActivePanel = ActivePanel.loupe;
 
             SendToMidiDevice.Send("Encoder");
 
@@ -40,6 +47,8 @@ namespace XTouchToLr.Engine
             Display.Send(6, "Midtone", "Split  ");
             Display.Send(7, "High.  ", "Split  ");
             Display.Send(8, "       ", "       ");
+
+            LrParameters.BigEncoderDisplayButtons();
 
             SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 95, 0);
 

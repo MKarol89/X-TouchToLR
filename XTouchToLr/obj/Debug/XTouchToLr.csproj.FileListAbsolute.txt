@@ -18,3 +18,14 @@ F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csproj
 F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csproj.CoreCompileInputs.cache
 F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.exe
 F:\!DEV\!Projekty\X-TouchToLR\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.pdb
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.exe.config
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.exe
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\XTouchToLr.pdb
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.dll
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.pdb
+H:\!DEV\X-TouchToLR\XTouchToLr\bin\Debug\Sanford.Multimedia.Midi.xml
+H:\!DEV\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csprojAssemblyReference.cache
+H:\!DEV\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csproj.CoreCompileInputs.cache
+H:\!DEV\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.csproj.CopyComplete
+H:\!DEV\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.exe
+H:\!DEV\X-TouchToLR\XTouchToLr\obj\Debug\XTouchToLr.pdb
