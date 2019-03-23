@@ -25,7 +25,7 @@ namespace XTouchToLr
 
             Thread midiSendingThread = new Thread(SendToMidiDevice.ThreadSendingMidi);
             midiSendingThread.Start();
-
+            
             
 
 

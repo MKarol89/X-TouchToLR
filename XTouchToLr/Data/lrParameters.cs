@@ -62,6 +62,13 @@ namespace XTouchToLr.Data
             listParameter.Add(new Parameter("LuminanceAdjustmentBlue", 100f, -100f));
             listParameter.Add(new Parameter("LuminanceAdjustmentPurple", 100f, -100f));
             listParameter.Add(new Parameter("LuminanceAdjustmentMagenta", 100f, -100f));
+
+            listParameter.Add(new Parameter("PostCropVignetteAmount", 100f, -100f));
+            listParameter.Add(new Parameter("PostCropVignetteMidpoint", 100f, 0f));
+            listParameter.Add(new Parameter("PostCropVignetteFeather", 100f, 0f));
+            listParameter.Add(new Parameter("PostCropVignetteRoundness", 100f, -100f));
+            listParameter.Add(new Parameter("PostCropVignetteHighlightContrast", 100f, 0f));
+
         }
 
         public static void SetParameters(string[] model)
@@ -379,6 +386,19 @@ namespace XTouchToLr.Data
 
             }
 
+            if (GlobalSettings.EncoderMenuPosition == 5)
+            {
+                //EncoderMethod(b0, b1, b2, 176, 16, "LuminanceAdjustmentRed", 144, 32, 127);
+                EncoderMethod(b0, b1, b2, 176, 17, "PostCropVignetteAmount", 144, 33, 127);
+                EncoderMethod(b0, b1, b2, 176, 18, "PostCropVignetteMidpoint", 144, 34, 127);
+                EncoderMethod(b0, b1, b2, 176, 19, "PostCropVignetteFeather", 144, 35, 127);
+                EncoderMethod(b0, b1, b2, 176, 20, "PostCropVignetteRoundness", 144, 36, 127);
+                EncoderMethod(b0, b1, b2, 176, 21, "PostCropVignetteHighlightContrast", 144, 37, 127);
+                //EncoderMethod(b0, b1, b2, 176, 22, "LuminanceAdjustmentPurple", 144, 38, 127);
+                //EncoderMethod(b0, b1, b2, 176, 23, "LuminanceAdjustmentMagenta", 144, 39, 127);
+
+            }
+
             //////////////////////ENCODERS MENU/////////////////////////////
 
             if (b0 == 144 && b1 == 40 && b2 == 127)
@@ -454,6 +474,16 @@ namespace XTouchToLr.Data
                 GlobalSettings.EncoderMenuPosition = 5;
 
                 SendToMidiDevice.Send("Encoder");
+
+                Display.Send(1, "Vignett", "Style  ");
+                Display.Send(2, "Vignett", "Amount ");
+                Display.Send(3, "Vignett", "MidPoi ");
+                Display.Send(4, "Vignett", "Feather");
+                Display.Send(5, "Vignett", "Roudnes");
+                Display.Send(6, "Vignett", "H.Contr");
+                Display.Send(7, "       ", "       ");
+                Display.Send(8, "       ", "       ");
+
             }  //MENU 5
 
             if (b0 == 144 && b1 == 45 && b2 == 127)
@@ -519,7 +549,7 @@ namespace XTouchToLr.Data
                 GlobalSettings.IsSaving = true;
 
                 SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 95, 127);
-            }
+            }   //SET SAVE
 
             if (b0 == 144 && b1 == 80 && b2 == 127)
             {
@@ -536,7 +566,7 @@ namespace XTouchToLr.Data
                 {
                     SaveReadParameters.Read(1);
                 }
-            }
+            }   //BANK 1
 
             if (b0 == 144 && b1 == 81 && b2 == 127)
             {
@@ -554,7 +584,7 @@ namespace XTouchToLr.Data
                 {
                     SaveReadParameters.Read(2);
                 }
-            }
+            }   //BANK 2
 
             if (b0 == 144 && b1 == 82 && b2 == 127)
             {
@@ -572,7 +602,7 @@ namespace XTouchToLr.Data
                 {
                     SaveReadParameters.Read(3);
                 }
-            }
+            }   //BANK 3
 
             if (b0 == 144 && b1 == 83 && b2 == 127)
             {
@@ -590,7 +620,7 @@ namespace XTouchToLr.Data
                 {
                     SaveReadParameters.Read(4);
                 }
-            }
+            }   //BANK 4
 
             /////////////////// UNDO - REDO ///////////////////
 
@@ -599,24 +629,24 @@ namespace XTouchToLr.Data
                 SendToLr.Send("select", "undo");
 
                 SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 91, 127);
-            }
+            }   //UNDO
 
             if (b0 == 144 && b1 == 91 && b2 == 0)
             {
                 SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 91, 0);
-            }
+            }     //UNDO BUTTON LIGHT OFF
 
-            if (b0 == 144 && b1 == 92 && b2 == 127)
+            if (b0 == 144 && b1 == 92 && b2 == 127)         
             {
                 SendToLr.Send("select", "redo");
 
                 SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 92, 127);
-            }
+            }   //REDO
 
-            if (b0 == 144 && b1 == 92 && b2 == 0)
+            if (b0 == 144 && b1 == 92 && b2 == 0)          
             {
                 SendToMidiDevice.MidiSend(ChannelCommand.NoteOn, 0, 92, 0);
-            }
+            }     //REDO BUTTON LIGHT OFF
 
             ////////////////////////////  FADERS  ////////////////////////////////////
 
